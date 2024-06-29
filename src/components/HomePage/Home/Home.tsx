@@ -1,16 +1,18 @@
 import Cover from './Cover';
-import Footer from './HomeFooter';
+import CoverDescription from './CoverDescription';
 
 export default function Home() {
   return (
     <section className="h-screen">
-      <Cover/>
+      <div className='fixed top-0 left-0 -z-10 w-full'>
+        <Cover/>
+      </div>
       <div className='flex h-full justify-center items-center'>
         <h1>
           Hi there
         </h1>
       </div>
-      <Footer/>
+      <CoverDescription/>
     </section>
   );
 }
