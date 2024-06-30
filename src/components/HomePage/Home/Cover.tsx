@@ -1,26 +1,24 @@
 interface CoverProps {
   imageUrl: string;
   mediaType: string;
-  thumbnail_url?: string; 
+  thumbnailUrl?: string;
 }
 
-export default function Cover({ imageUrl, mediaType }: CoverProps) {
+export default function Cover({ imageUrl, mediaType, thumbnailUrl }: CoverProps) {
+  let displayUrl = imageUrl;
+
+  if (mediaType === 'video' && thumbnailUrl) {
+    const videoId = thumbnailUrl.split('/').slice(-2, -1)[0];
+    displayUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  }
+
   return (
     <div>
-      {mediaType === 'image' ? (
-        <img 
-          src={imageUrl} 
-          alt="cover" 
-          className='fixed top-0 left-0 -z-10 object-cover h-screen w-full'
-        />
-      ) : (
-        <iframe
-          src={imageUrl}
-          title="NASA video"
-          className='fixed top-0 left-0 -z-10 object-cover h-screen w-full'
-          allowFullScreen
-        />
-      )}
+      <img 
+        src={displayUrl} 
+        alt="cover" 
+        className=" top-0 left-0 -z-10 object-cover h-screen w-full dark:brightness-[0.]"
+      />
     </div>
   );
 }

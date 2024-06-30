@@ -28,7 +28,7 @@ interface CoverDescriptionProps {
 export default function CoverDescription({ data, date, setDate }: CoverDescriptionProps) {
   const [inputDate, setInputDate] = useState(date);
   const today = new Date().toISOString().split('T')[0];
-  const minDate = '2015-01-01'; // Minimum date to be 2015-01-01
+  const minDate = '1995-06-16'; // Minimum date to be 2015-01-01
 
   if (!data) {
     return null;
@@ -47,13 +47,13 @@ export default function CoverDescription({ data, date, setDate }: CoverDescripti
   };
 
   return (
-    <div className="absolute bottom-0 w-full select-none pt-20 z-10 bg-gradient-to-t from-background">
-      <div className="flex flex-col sm:flex-row items-center p-6 sm:p-8 justify-between">
-        <div className="mb-4 sm:mb-0 sm:mr-4">
+    <div className="absolute bottom-0 w-full select-none pt-20 bg-gradient-to-t from-muted ...">
+      <div className="flex flex-col sm:flex-row items-center p-6 sm:p-8 justify-between ">
+        <div className="w-full sm:w-auto mb-4 sm:mb-0 sm:mr-4">
         <h1 className="text-lg font-semibold">Nasa photo of the day</h1>
-        <hr className="border-primary border-t-1 w-full mb-2" />
+        <hr className="border-primary border-t-1 mb-2" />
         <div className="flex items-center justify-center gap-4">
-            <h2 className="text-2xl sm:text-3xl font-medium">{data.title}</h2>
+            <h2 className="w-full text-2xl sm:text-3xl font-medium">{data.title}</h2>
             <Sheet>
               <SheetTrigger>
                 <Info className='h-5 w-5 mt-1'/>
@@ -61,7 +61,7 @@ export default function CoverDescription({ data, date, setDate }: CoverDescripti
               <SheetContent side="right" className='w-full'>
                 <SheetHeader className='h-full'>
                   <SheetTitle>{data.title}</SheetTitle>
-                  <div className='h-full overflow-y-auto no-scrollba'>
+                  <div className='h-full overflow-y-auto no-scrollbar'>
                     <SheetDescription >
                       {data.media_type === 'image' ? (
                       <img src={data.url} alt={data.title} className="max-w-full h-full mb-3" />
@@ -86,21 +86,21 @@ export default function CoverDescription({ data, date, setDate }: CoverDescripti
             <Search className='h-4 w-4'/>
             <h2 className='font-normal'>Explore the universe</h2>
           </div>
-          <form onSubmit={handleSubmit} className="flex items-center">
+          <form onSubmit={handleSubmit} className="flex items-center shadow-md">
             <Input 
               type="date" 
               value={inputDate} 
               max={today}
               min={minDate}
               onChange={(e) => setInputDate(e.target.value)} 
-              className='rounded-none border-none rounded-l-lg focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 cursor-text'
+              className='rounded-none border-none rounded-l-lg focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 cursor-text bg-muted'
             />
             <Button 
               type="submit"
               className='rounded-none rounded-r-lg' 
               disabled={!isDateValid(inputDate)}
             >
-              <Telescope />
+              <Telescope className='h-5 w-5'/>
             </Button>
           </form>
         </div>

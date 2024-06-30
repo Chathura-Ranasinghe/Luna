@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Cover from './Cover';
 import CoverDescription from './CoverDescription';
 import useNasaApod from '@/hooks/useNasaApod';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 export default function Home() {
   const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
@@ -12,12 +13,17 @@ export default function Home() {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    const errorMsg = error || "An unexpected error occurred.";
+    return <NotFoundPage errorMsg={errorMsg} />;
   }
 
   return (
-    <section className="h-screen">
-      <Cover imageUrl={data?.url ?? ''} mediaType={data?.media_type ?? 'image'} />
+    <section className="h-screen ">
+      <Cover 
+        imageUrl={data?.url ?? ''} 
+        mediaType={data?.media_type ?? ''} 
+        thumbnailUrl={data?.thumbnail_url} 
+      />
       <div className="flex h-full justify-center items-center">
         <h1>Hi there</h1>
       </div>
