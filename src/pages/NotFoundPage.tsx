@@ -6,7 +6,7 @@ interface NotFoundPageProps {
   
   export default function NotFoundPage({ errorMsg }: NotFoundPageProps) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen gap-3 bg-background">
+      <div className="flex flex-col items-center justify-center h-[540px] gap-3 bg-muted">
       <img 
           src={Error} 
           alt="Error" 

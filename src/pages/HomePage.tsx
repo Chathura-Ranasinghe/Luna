@@ -1,4 +1,4 @@
-import HomeFooter from "../components/HomePage/Footer/Footer";
+import APOD from "@/components/HomePage/APOD/APOD";
 import Home from "../components/HomePage/Home/Home";
 
 export default function HomePage() {
@@ -6,8 +6,8 @@ export default function HomePage() {
     <>
       <main>
         <Home/>
+        <APOD/>
       </main>
-      <HomeFooter/>
     </>
   )
 }

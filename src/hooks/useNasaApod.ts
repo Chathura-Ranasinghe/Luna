@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 interface NasaApodData {
   url: string;
   title: string;
   explanation: string;
-  media_type: string;
-  thumbnail_url?: string; // Add thumbnail_url to the interface
+  media_type: string; // Add media_type to the interface
 }
 
 export default function useNasaApod(date: string) {
@@ -17,7 +15,7 @@ export default function useNasaApod(date: string) {
   useEffect(() => {
     async function fetchAPIData() {
       const NASA_KEY = import.meta.env.VITE_NASA_API_KEY;
-      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&date=${date}&thumbs=true`;
+      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&date=${date}`;
 
       const localKey = `NASA-${date}`;
       if (localStorage.getItem(localKey)) {
@@ -30,15 +28,16 @@ export default function useNasaApod(date: string) {
       localStorage.clear();
 
       try {
-        const res = await axios.get(url);
-        const apiData = res.data;
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const apiData = await res.json();
         localStorage.setItem(localKey, JSON.stringify(apiData));
         setData(apiData);
         setLoading(false);
       } catch (err: unknown) {
-        if (axios.isAxiosError(err)) {
-          setError(err.message);
-        } else if (err instanceof Error) {
+        if (err instanceof Error) {
           setError(err.message);
         } else {
           setError('An unknown error occurred');
