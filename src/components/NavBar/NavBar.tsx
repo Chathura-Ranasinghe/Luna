@@ -1,4 +1,9 @@
-import { Menu, Rocket  } from 'lucide-react';
+import { Menu, Rocket } from 'lucide-react';
+import { motion, useScroll, useMotionValueEvent, useAnimation } from "framer-motion";
+import { useInView } from 'react-intersection-observer';
+import { NavLink } from 'react-router-dom';
+import { ModeToggle } from '../ui/DarkMode/mode-toggle';
+import { useEffect, useState } from 'react';
 
 import {
   Sheet,
@@ -7,58 +12,93 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
-
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from '../ui/DarkMode/mode-toggle';
+} from "@/components/ui/sheet";
 
 export default function NavBar() {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+
+  const controls = useAnimation();
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (previous && latest > previous && latest > 120) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
+
+  const getNavLinkClass = (isActive: boolean) =>
+    isActive
+      ? "text-base font-bold text-foregrounde  transition ease-in-out duration-300"
+      : "text-base font-medium text-muted-foreground hover:text-foreground transition ease-in-out duration-300";
 
   return (
-    <div className="fixed top-0 left-0 w-full select-none z-10">
-      <header className="flex h-20 px-6 py-3 sm:px-8">
-        <nav className="flex w-full h-full px-4 items-center bg-muted/80 justify-between rounded-lg shadow-md">
-           <div className="flex items-center w-[120px]">
-              <span 
-                className="flex text-3xl items-center gap-3 font-bold cursor-pointer" 
-                ><Rocket size={30} />
-                LUNA
-              </span>
+      <motion.header 
+       ref={ref}
+       initial="hidden"
+       animate={controls}
+       variants={{
+         visible: { y: 0 },
+         hidden: {  y: -20 }
+       }}
+       transition={{ duration: 0.5 }}
+      className="fixed w-full top-0 flex h-20 px-6 py-3 sm:px-8 z-20">
+        <motion.nav
+          variants={{
+            visible: {opacity: 1, y: 0 },
+            hidden: { opacity: 0, y: "-120%" },
+          }}
+          animate={hidden ? "hidden" : "visible"}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+          className="sticky flex w-full h-full px-4 items-center bg-muted/70 backdrop-blur-md justify-between shadow-md"
+        >
+          <div className="flex items-center w-[120px]">
+            <span className="flex text-3xl items-center gap-3 font-bold cursor-pointer">
+              <Rocket size={30} />
+              LUNA
+            </span>
+          </div>
+          <div className='gap-3 hidden sm:flex'>
+            <NavLink to="/" className={({ isActive }) => getNavLinkClass(isActive)}>Home</NavLink>
+            <NavLink to="/APODPage" className={({ isActive }) => getNavLinkClass(isActive)}>APOD</NavLink>
+            <NavLink to="/NeoWs" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>
+          </div>
+          <div className='flex items-center justify-end w-[120px] gap-3'>
+            <div>
+              <NavLink to="/About" className={({ isActive }) => getNavLinkClass(isActive)}>About</NavLink>
             </div>
-            <div className='gap-3 hidden sm:flex'>
-              <Button variant='ghost'>Home</Button>
-              <Button variant='ghost'>Home</Button>
-              <Button variant='ghost'>Home</Button>
-              <Button variant='ghost'>Home</Button>
-            </div>
-            <div className='flex items-center justify-end  w-[120px] gap-3'>
-              <Button variant='ghost' className='hidden sm:flex'>Join</Button>
-              <ModeToggle/>
-              <Sheet>
-              <SheetTrigger className='flex sm:hidden'><Menu /></SheetTrigger>
+            <ModeToggle />
+            <div className='flex sm:hidden'>
+            <Sheet>
+              <SheetTrigger ><Menu /></SheetTrigger>
               <SheetContent side="left">
-                <SheetHeader>
+                <SheetHeader className='gap-4'>
                   <SheetTitle>
-                    <span 
-                      className="flex text-3xl items-center gap-3 font-bold cursor-pointer" 
-                      ><Rocket size={30} />
+                    <span className="flex text-3xl items-center gap-3 font-bold cursor-pointer">
+                      <Rocket size={30} />
                       LUNA
                     </span>
                   </SheetTitle>
-                  <SheetDescription>
-                    <div className='flex flex-col'>
-                      <Button variant='ghost'>Home</Button>
-                      <Button variant='ghost'>Home</Button>
-                      <Button variant='ghost'>Home</Button>
-                      <Button variant='ghost'>Home</Button>
-                    </div>
+                  <SheetDescription className='flex text-foreground flex-col items-start h-full gap-2'>
+                    <NavLink to="/" className={({ isActive }) => getNavLinkClass(isActive)}>Home</NavLink>
+                    <NavLink to="/APODPage" className={({ isActive }) => getNavLinkClass(isActive)}>APOD</NavLink>
+                    <NavLink to="/NeoWs" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>
                   </SheetDescription>
                 </SheetHeader>
               </SheetContent>
             </Sheet>
             </div>
-        </nav>
-      </header>
-  </div>
+          </div>
+        </motion.nav>
+      </motion.header>
   );
 }

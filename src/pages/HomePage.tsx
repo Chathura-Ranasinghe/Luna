@@ -1,12 +1,14 @@
-import APOD from "@/components/HomePage/APOD/APOD";
-import Home from "../components/HomePage/Home/Home";
+import Cover from "../components/HomePage/Cover";
+import Slider from "@/components/Slider/Slider";
+import NasaNews from "@/components/NasaNews/NasaNews";
 
 export default function HomePage() {
   return (
     <>
       <main>
-        <Home/>
-        <APOD/>
+        <Cover/>
+        <Slider/>
+        <NasaNews/>
       </main>
     </>
   )
