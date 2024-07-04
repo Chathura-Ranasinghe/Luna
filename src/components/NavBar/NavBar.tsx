@@ -51,7 +51,7 @@ export default function NavBar() {
          hidden: {  y: -20 }
        }}
        transition={{ duration: 0.5 }}
-      className="fixed w-full top-0 flex h-20 px-6 py-3 sm:px-8 z-20">
+      className="sticky w-full top-0 flex h-20 px-6 py-3 sm:px-8 z-20">
         <motion.nav
           variants={{
             visible: {opacity: 1, y: 0 },
@@ -70,7 +70,7 @@ export default function NavBar() {
           <div className='gap-3 hidden sm:flex'>
             <NavLink to="/" className={({ isActive }) => getNavLinkClass(isActive)}>Home</NavLink>
             <NavLink to="/APODPage" className={({ isActive }) => getNavLinkClass(isActive)}>APOD</NavLink>
-            <NavLink to="/NeoWs" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>
+            <NavLink to="/NeoWsPage" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>
           </div>
           <div className='flex items-center justify-end w-[120px] gap-3'>
             <div>

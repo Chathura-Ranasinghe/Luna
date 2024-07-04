@@ -4,7 +4,11 @@ import TypingAnimation from "../ui/magicui/typing-animation";
 
 //import CoverImg from "@/assets/images/wallOne.jpg"
 
-export default function Cover() {
+interface CoverProps {
+  text: string;
+}
+
+export default function Cover({ text }: CoverProps) {
   return (
     <section className="relative h-96">
         <div className="absolute bottom-0 left-0 h-48 w-full bg-gradient-to-t from-muted ..."></div>
@@ -14,10 +18,10 @@ export default function Cover() {
         className="fixed -z-10 h-full w-full object-cover dark:brightness-[0.6]"
         /> */}
         <div className='flex h-full p-6 pt-20 sm:p-8 sm:pt-20'>
-            <div className="relative flex h-full w-full items-center p-20 justify-center overflow-hidden rounded-lg">
+            <div className="relative flex h-full w-full items-center p-10 justify-center overflow-hidden rounded-lg">
                 <TypingAnimation
                   className='text-5xl md:text-6xl font-mono font-semibold text-left capitalize'
-                  text= "NASA Astronomy Photo of the Day."
+                  text={text}
                 />
                 <GridPattern
                     width={30}
@@ -32,6 +36,5 @@ export default function Cover() {
             </div>
         </div>
     </section>
-    
   )
 }

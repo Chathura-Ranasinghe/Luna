@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-interface NasaApodData {
-  url: string;
-  title: string;
-  explanation: string;
-  media_type: string;
+interface NeoWsData {
+  id: string;
+  name: string;
+  close_approach_data: {
+    close_approach_date: string;
+    relative_velocity: {
+      kilometers_per_hour: string;
+    };
+    miss_distance: {
+      kilometers: string;
+    };
+  }[];
 }
 
 interface ErrorData {
@@ -13,17 +20,17 @@ interface ErrorData {
   code?: string;
 }
 
-export default function useNasaApod(date: string) {
-  const [data, setData] = useState<NasaApodData | null>(null);
+export default function useNasaNeoWs() {
+  const [data, setData] = useState<NeoWsData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ErrorData | null>(null);
 
   useEffect(() => {
-    async function fetchAPIData() {
+    async function fetchNeoWsData() {
       const NASA_KEY = import.meta.env.VITE_NASA_API_KEY;
-      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&date=${date}&thumbs=true`;
+      const url = `https://api.nasa.gov/neo/rest/v1/feed/today?detailed=true&api_key=${NASA_KEY}`;
 
-      const localKey = `NASA-${date}`;
+      const localKey = `NeoWs-${new Date().toISOString().split('T')[0]}`;
       const cachedData = localStorage.getItem(localKey);
 
       if (cachedData) {
@@ -32,16 +39,14 @@ export default function useNasaApod(date: string) {
         return;
       }
 
-      //localStorage.clear();
-
       try {
         const res = await axios.get(url);
-        const apiData = res.data;
+        const apiData = res.data.near_earth_objects[new Date().toISOString().split('T')[0]];
         localStorage.setItem(localKey, JSON.stringify(apiData));
         setData(apiData);
       } catch (err: unknown) {
         if (axios.isAxiosError(err)) {
-          setError({ message: err.message, code: err.response?.status.toString() });
+          setError({ message: err.message, code: err.response?.status?.toString() });
         } else {
           setError({ message: 'An unknown error occurred' });
         }
@@ -49,8 +54,8 @@ export default function useNasaApod(date: string) {
         setLoading(false);
       }
     }
-    fetchAPIData();
-  }, [date]);
+    fetchNeoWsData();
+  }, []);
 
   return { data, loading, error };
 }

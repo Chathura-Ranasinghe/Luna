@@ -1,14 +1,12 @@
-import Cover from "../components/HomePage/Cover";
+import HomeCover from "../components/HomePage/HomeCover";
 import Slider from "@/components/Slider/Slider";
-import NasaNews from "@/components/NasaNews/NasaNews";
 
 export default function HomePage() {
   return (
     <>
       <main>
-        <Cover/>
+        <HomeCover/>
         <Slider/>
-        <NasaNews/>
       </main>
     </>
   )

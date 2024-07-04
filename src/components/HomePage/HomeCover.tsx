@@ -4,7 +4,7 @@ import TypingAnimation from "@/components/ui/magicui/typing-animation";
 
 import signupimage from '@/assets/images/moon.gif';
 
-export default function Cover() {
+export default function HomeCover() {
   return (
     <section className="h-screen">
       <div className="absolute bottom-0 left-0 h-56 w-full bg-gradient-to-t from-muted ..."></div>

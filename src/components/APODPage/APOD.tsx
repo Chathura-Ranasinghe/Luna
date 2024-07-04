@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import useNasaApod from '@/hooks/useNasaApod';
+import ApodThumbnails from '@/components/APODPage/ApodThumbnails';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import NotFoundPage from '@/pages/NotFoundPage';
 import useValidateDate from '@/hooks/useValidateDate';
+import Loading from '../../pages/LoadingPage';
 
 export default function APOD() {
   const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
@@ -24,6 +26,11 @@ export default function APOD() {
     }
   }, [isValidDate, inputDate]);
 
+  const handleThumbnailClick = useCallback((selectedDate: string) => {
+    setDate(selectedDate);
+    setInputDate(selectedDate);
+  }, []);
+
   const displayDate = useCallback((date: string) => {
     const today = new Date().toISOString().split('T')[0];
     return date === today ? "Today" : date;
@@ -34,7 +41,7 @@ export default function APOD() {
   }, [inputDate, validateDate]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {
@@ -42,13 +49,14 @@ export default function APOD() {
   }
 
   if (!data) {
-    return <div>No data available</div>;
+    return <div className='w-full flex h-24 items-center justify-center bg-muted'>No data available</div>;
   }
 
   return (
     <section className="h-full p-6 sm:p-8 sm:py-24 bg-muted">
       <div className='flex flex-col gap-8 sm:gap-16 h-full'>
-        <div className='grid sm:flex gap-6 justify-center'>         
+        <div className='grid justify-between sm:flex gap-3 sm:gap-0 items-end'>
+          <h1 className='capitalize text-6xl sm:text-8xl font-bold text-muted-foreground/10'>Discover the cosmos!</h1>        
           <div className='flex'>
             <Input 
               type="date" 
@@ -56,7 +64,7 @@ export default function APOD() {
               onChange={handleDateChange} 
               min="1995-06-16"
               max={new Date().toISOString().split('T')[0]}
-              className='bg-background/20 border-none rounded-none shadow-md'
+              className='bg-background/50 border-none rounded-none shadow-md mb-4'
             />
             <Button 
               onClick={handleFetchImage} 
@@ -87,7 +95,7 @@ export default function APOD() {
             )}
           </div>
           <div className='flex flex-col h-[540px] gap-4 justify-between'>
-            <div>
+            <div className='pl-4'>
               <h1 className='border-muted-foreground text-2xl font-bold'>{data.title}</h1>
               <p className='text-lg text-muted-foreground font-semibold'>{displayDate(date)}</p>
             </div>
@@ -96,6 +104,7 @@ export default function APOD() {
             </div>
           </div>
         </div>
+        <ApodThumbnails onThumbnailClick={handleThumbnailClick} />
       </div>
     </section>
   );

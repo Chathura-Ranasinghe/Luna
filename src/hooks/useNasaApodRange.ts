@@ -6,6 +6,8 @@ interface NasaApodData {
   title: string;
   explanation: string;
   media_type: string;
+  date: string;
+  thumbnail_url?: string; // Add thumbnail_url for video
 }
 
 interface ErrorData {
@@ -13,17 +15,17 @@ interface ErrorData {
   code?: string;
 }
 
-export default function useNasaApod(date: string) {
-  const [data, setData] = useState<NasaApodData | null>(null);
+export default function useNasaApodRange(startDate: string, endDate: string) {
+  const [data, setData] = useState<NasaApodData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ErrorData | null>(null);
 
   useEffect(() => {
     async function fetchAPIData() {
       const NASA_KEY = import.meta.env.VITE_NASA_API_KEY;
-      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&date=${date}&thumbs=true`;
+      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&start_date=${startDate}&end_date=${endDate}&thumbs=true`;
 
-      const localKey = `NASA-${date}`;
+      const localKey = `NASA-${startDate}-${endDate}`;
       const cachedData = localStorage.getItem(localKey);
 
       if (cachedData) {
@@ -32,8 +34,6 @@ export default function useNasaApod(date: string) {
         return;
       }
 
-      //localStorage.clear();
-
       try {
         const res = await axios.get(url);
         const apiData = res.data;
@@ -41,7 +41,7 @@ export default function useNasaApod(date: string) {
         setData(apiData);
       } catch (err: unknown) {
         if (axios.isAxiosError(err)) {
-          setError({ message: err.message, code: err.response?.status.toString() });
+          setError({ message: err.message, code: err.response?.status?.toString() });
         } else {
           setError({ message: 'An unknown error occurred' });
         }
@@ -50,7 +50,7 @@ export default function useNasaApod(date: string) {
       }
     }
     fetchAPIData();
-  }, [date]);
+  }, [startDate, endDate]);
 
   return { data, loading, error };
 }

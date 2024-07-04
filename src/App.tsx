@@ -7,6 +7,7 @@ import APODPage from "./pages/APODPage";
 
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import NeoWsPage from "./pages/NeoWsPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route index element={<HomePage/>} />
             <Route path="/APODPage" element={<APODPage/>} />
+            <Route path="/NeoWsPage" element={<NeoWsPage/>} />
           </Routes>
         <Footer/>
         </BrowserRouter>

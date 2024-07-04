@@ -1,11 +1,11 @@
 import APOD from "@/components/APODPage/APOD";
-import Cover from "../components/APODPage/Cover";
+import Cover from "../components/Cover/Cover";
 
 export default function APODPage() {
   return (
     <>
       <main>
-        <Cover/>
+        <Cover text="NASA Astronomy Photo of the Day." />
         <APOD/>
       </main>
     </>
