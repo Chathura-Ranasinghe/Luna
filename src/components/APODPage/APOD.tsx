@@ -1,49 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import useNasaApod from '@/hooks/useNasaApod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import NotFoundPage from '@/pages/NotFoundPage';
+import useValidateDate from '@/hooks/useValidateDate';
 
 export default function APOD() {
   const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [inputDate, setInputDate] = useState<string>(date);
-  const [isValidDate, setIsValidDate] = useState<boolean>(true);
+  const { isValidDate, validateDate } = useValidateDate();
   const { data, loading, error } = useNasaApod(date);
 
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDateChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const newDate = event.target.value;
     setInputDate(newDate);
     validateDate(newDate);
-  };
+  }, [validateDate]);
 
-  const validateDate = (date: string) => {
-    const minDate = new Date('1994-06-16').toISOString().split('T')[0];
-    const maxDate = new Date().toISOString().split('T')[0];
-    setIsValidDate(date >= minDate && date <= maxDate);
-  };
-
-  const handleFetchImage = () => {
+  const handleFetchImage = useCallback(() => {
     if (isValidDate) {
       setDate(inputDate);
     }
-  };
+  }, [isValidDate, inputDate]);
 
-  const displayDate = (date: string) => {
+  const displayDate = useCallback((date: string) => {
     const today = new Date().toISOString().split('T')[0];
     return date === today ? "Today" : date;
-  };
+  }, []);
 
   useEffect(() => {
     validateDate(inputDate);
-  }, [inputDate]);
+  }, [inputDate, validateDate]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <NotFoundPage errorMsg={error}/>;
+    return <NotFoundPage errorMsg={error.message} errorCode={error.code} />;
   }
 
   if (!data) {

@@ -10,16 +10,16 @@ export default function Footer() {
             <p className="text-base">© 2024 Luna. All rights reserved.</p>
           </div>
           <div className="flex gap-3">
-            <Link to="#" className="hover:text-muted-foreground transition-colors" >
-              <Linkedin className="h-5 w-5" />
+            <Link to="#" >
+              <Linkedin strokeWidth={0} className="h-5 w-5 fill-foreground hover:fill-muted-foreground transition ease-in-out duration-300" />
               <span className="sr-only">YouTube</span>
             </Link>
-            <Link to="#" className="hover:text-muted-foreground transition-colors" >
-              <Github className="h-5 w-5" />
+            <Link to="#" className="transition-colors" >
+              <Github strokeWidth={0} className="h-5 w-5 fill-foreground hover:fill-muted-foreground transition ease-in-out duration-300" />
               <span className="sr-only">GitHub</span>
             </Link>
-            <Link to="#" className="hover:text-muted-foreground transition-colors">
-              <Facebook className="h-5 w-5" />
+            <Link to="#" className=" transition-colors">
+              <Facebook strokeWidth={0} className="h-5 w-5 fill-foreground hover:fill-muted-foreground transition ease-in-out duration-300" />
               <span className="sr-only">Twitter</span>
             </Link>
           </div>

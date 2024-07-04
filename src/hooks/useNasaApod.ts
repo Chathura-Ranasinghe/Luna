@@ -1,47 +1,49 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface NasaApodData {
   url: string;
   title: string;
   explanation: string;
-  media_type: string; // Add media_type to the interface
+  media_type: string;
+}
+
+interface ErrorData {
+  message: string;
+  code?: string;
 }
 
 export default function useNasaApod(date: string) {
   const [data, setData] = useState<NasaApodData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ErrorData | null>(null);
 
   useEffect(() => {
     async function fetchAPIData() {
       const NASA_KEY = import.meta.env.VITE_NASA_API_KEY;
-      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&date=${date}`;
+      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&date=${date}&thumbs=true`;
 
       const localKey = `NASA-${date}`;
-      if (localStorage.getItem(localKey)) {
-        const apiData = JSON.parse(localStorage.getItem(localKey) || '');
-        setData(apiData);
+      const cachedData = localStorage.getItem(localKey);
+
+      if (cachedData) {
+        setData(JSON.parse(cachedData));
         setLoading(false);
         return;
       }
 
-      localStorage.clear();
-
       try {
-        const res = await fetch(url);
-        if (!res.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const apiData = await res.json();
+        const res = await axios.get(url);
+        const apiData = res.data;
         localStorage.setItem(localKey, JSON.stringify(apiData));
         setData(apiData);
-        setLoading(false);
       } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
+        if (axios.isAxiosError(err)) {
+          setError({ message: err.message, code: err.response?.status.toString() });
         } else {
-          setError('An unknown error occurred');
+          setError({ message: 'An unknown error occurred' });
         }
+      } finally {
         setLoading(false);
       }
     }
