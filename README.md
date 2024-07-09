@@ -92,6 +92,6 @@ Luna represents a blend of cutting-edge technology and a passion for space explo
 
 <img src="./src/assets/sources/neows.jpeg" alt="Home page" style="width:700px;">
 
-### NeoWs About 📡
+### About 📡
 
 <img src="./src/assets/sources/about.jpeg" alt="Home page" style="width:700px;">
