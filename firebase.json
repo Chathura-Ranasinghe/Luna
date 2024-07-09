@@ -6,6 +6,11 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "predeploy" : ["npm run build"]
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
 }
