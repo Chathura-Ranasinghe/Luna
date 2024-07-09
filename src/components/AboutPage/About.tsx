@@ -5,13 +5,14 @@ export default function About() {
     return (
       <section className="h-[92vh] bg-muted">
         <div className="relative h-3/5">
+        <div className="absolute bottom-0 left-0 h-56 w-full z-10 bg-gradient-to-t from-muted ..."></div>
             <img
                 src={cover}
                 alt="aboutImg"
                 className="relative w-full h-full top-0 left-0 object-cover dark:brightness-[0.6] bg-center"
             />
             <div className="absolute inset-0 flex items-center justify-center px-6 sm:px-8 pt-20">
-                <h1 className="text-center text-4xl sm:text-6xl md:text-7xl font-extrabold text-white">About This Page.</h1>
+                <h1 className="text-center text-4xl sm:text-6xl md:text-7xl font-extrabold text-white gap-1">About This Project<span className="text-red-700 ml-1">.</span></h1>
             </div>
         </div>
         <div className="flex h-2/5  justify-center items-center">

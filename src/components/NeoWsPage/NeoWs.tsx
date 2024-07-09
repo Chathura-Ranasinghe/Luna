@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import useNeoWs from '@/hooks/useNasaNeoWs';
-import Loading from '@/pages/LoadingPage';
+import Loading from '@/components/Loading/Loading';
 import NotFoundPage from '@/pages/NotFoundPage';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

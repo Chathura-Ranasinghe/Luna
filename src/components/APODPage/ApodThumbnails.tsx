@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
 import useNasaApodRange from '@/hooks/useNasaApodRange';
 import NotFoundPage from '@/pages/NotFoundPage';
-import Loading from '../../pages/LoadingPage';
+import Loading from '../Loading/Loading';
 
 interface ApodThumbnailsProps {
   onThumbnailClick: (date: string) => void;

@@ -1,7 +1,7 @@
 import { Menu, Rocket } from 'lucide-react';
 import { motion, useScroll, useMotionValueEvent, useAnimation } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { ModeToggle } from '../ui/DarkMode/mode-toggle';
 import { useEffect, useState } from 'react';
 
@@ -38,7 +38,7 @@ export default function NavBar() {
 
   const getNavLinkClass = (isActive: boolean) =>
     isActive
-      ? "text-base font-bold text-red-700  transition ease-in-out duration-300"
+      ? "text-base font-bold text-red-700 transition ease-in-out duration-300"
       : "text-base font-semibold text-foreground/80 hover:text-red-700 transition ease-in-out duration-300";
 
   return (
@@ -59,14 +59,14 @@ export default function NavBar() {
           }}
           animate={hidden ? "hidden" : "visible"}
           transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="sticky flex w-full h-full px-4 items-center bg-muted/80 dark:bg-muted/50 backdrop-blur-md justify-between shadow-md"
+          className="sticky flex w-full h-full px-4 items-center bg-muted/80 dark:bg-muted/60 backdrop-blur-md justify-between shadow-md"
         >
           <div className="flex items-center w-[130px]">
             <div className="flex w-full text-3xl items-center gap-3 font-bold select-none">
               <Rocket stroke='0' size={30} className='flex fill-foreground'/>
-              <span className='flex gap-1'>
+              <Link to='./' className='flex gap-1'>
                 LUNA<span className="text-red-700">.</span>
-              </span>
+              </Link>
             </div>
           </div>
           <div className='gap-4 md:gap-6 hidden items-center sm:flex'>
@@ -92,7 +92,7 @@ export default function NavBar() {
                     </span>
                   </div>
                   </SheetTitle>
-                  <SheetDescription className='flex text-foreground flex-col items-start h-full gap-2'>
+                  <SheetDescription className='flex flex-col items-start h-full gap-2'>
                     <NavLink to="/" className={({ isActive }) => getNavLinkClass(isActive)}>Home</NavLink>
                     <NavLink to="/apod" className={({ isActive }) => getNavLinkClass(isActive)}>APOD</NavLink>
                     <NavLink to="/neows" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>

@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Search, Telescope } from 'lucide-react';
 import NotFoundPage from '@/pages/NotFoundPage';
 import {useApodValidateDate} from '@/hooks/useValidateDate';
-import Loading from '../../pages/LoadingPage';
+import Loading from '@/components/Loading/Loading';
 
 export default function APOD() {
   const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
