@@ -67,7 +67,7 @@ During the development of Luna, several key skills and concepts were learned and
 - **Animation and Interactivity:** Enhanced user experience with animations using Framer Motion.
 
 ### 🎥 Credits
-- **Homepage Video:** The background video on the homepage is sourced from Pinterest.
+- **Homepage Video:** The background GIFs on the homepage is sourced from Pinterest.
 
 ### 💭 Future Improvements
 - **Enhanced Details:** Add more detailed visualizations of asteroid characteristics, including size comparisons and orbital paths.
