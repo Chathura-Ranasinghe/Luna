@@ -5,7 +5,7 @@ export default function NeoWsPage() {
   return (
     <>
       <main>
-        <Cover text="near earth Asteroid information." />
+        <Cover text="near earth Asteroid info" />
         <NeoWs/>
       </main>
     </>

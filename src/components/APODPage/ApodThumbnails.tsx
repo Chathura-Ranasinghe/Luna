@@ -44,7 +44,7 @@ const ApodThumbnails: FC<ApodThumbnailsProps> = ({ onThumbnailClick }) => {
             ) : (
               <img src={apod.thumbnail_url} alt={apod.title} className='object-cover w-full h-full' />
             )}
-            <div className='absolute inset-0 flex items-center justify-center bg-background/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+            <div className='absolute inset-0 flex items-center justify-center bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
               <span className='text-center p-2'>{apod.title}</span>
             </div>
           </div>

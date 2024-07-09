@@ -5,7 +5,7 @@ export default function APODPage() {
   return (
     <>
       <main>
-        <Cover text="NASA Astronomy Photo of the Day." />
+        <Cover text="NASA Astronomy Photo of the Day" />
         <APOD/>
       </main>
     </>

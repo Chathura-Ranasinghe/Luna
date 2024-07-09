@@ -38,8 +38,8 @@ export default function NavBar() {
 
   const getNavLinkClass = (isActive: boolean) =>
     isActive
-      ? "text-base font-bold text-foregrounde  transition ease-in-out duration-300"
-      : "text-base font-medium text-muted-foreground hover:text-foreground transition ease-in-out duration-300";
+      ? "text-base font-bold text-red-700  transition ease-in-out duration-300"
+      : "text-base font-semibold text-foreground/80 hover:text-red-700 transition ease-in-out duration-300";
 
   return (
       <motion.header 
@@ -51,7 +51,7 @@ export default function NavBar() {
          hidden: {  y: -20 }
        }}
        transition={{ duration: 0.5 }}
-      className="sticky w-full top-0 flex h-20 px-6 py-3 sm:px-8 z-20">
+      className="fixed w-full top-0 flex h-20 px-6 py-3 sm:px-8 z-20">
         <motion.nav
           variants={{
             visible: {opacity: 1, y: 0 },
@@ -59,22 +59,24 @@ export default function NavBar() {
           }}
           animate={hidden ? "hidden" : "visible"}
           transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="sticky flex w-full h-full px-4 items-center bg-muted/70 backdrop-blur-md justify-between shadow-md"
+          className="sticky flex w-full h-full px-4 items-center bg-muted/80 dark:bg-muted/50 backdrop-blur-md justify-between shadow-md"
         >
-          <div className="flex items-center w-[120px]">
-            <span className="flex text-3xl items-center gap-3 font-bold cursor-pointer">
-              <Rocket size={30} />
-              LUNA
-            </span>
+          <div className="flex items-center w-[130px]">
+            <div className="flex w-full text-3xl items-center gap-3 font-bold select-none">
+              <Rocket stroke='0' size={30} className='flex fill-foreground'/>
+              <span className='flex gap-1'>
+                LUNA<span className="text-red-700">.</span>
+              </span>
+            </div>
           </div>
-          <div className='gap-3 hidden sm:flex'>
+          <div className='gap-4 md:gap-6 hidden items-center sm:flex'>
             <NavLink to="/" className={({ isActive }) => getNavLinkClass(isActive)}>Home</NavLink>
-            <NavLink to="/APODPage" className={({ isActive }) => getNavLinkClass(isActive)}>APOD</NavLink>
-            <NavLink to="/NeoWsPage" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>
+            <NavLink to="/apod" className={({ isActive }) => getNavLinkClass(isActive)}>APOD</NavLink>
+            <NavLink to="/neows" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>
           </div>
-          <div className='flex items-center justify-end w-[120px] gap-3'>
+          <div className='flex items-center justify-end w-[130px] gap-3'>
             <div>
-              <NavLink to="/About" className={({ isActive }) => getNavLinkClass(isActive)}>About</NavLink>
+              <NavLink to="/about" className={({ isActive }) => getNavLinkClass(isActive)}>About</NavLink>
             </div>
             <ModeToggle />
             <div className='flex sm:hidden'>
@@ -83,15 +85,18 @@ export default function NavBar() {
               <SheetContent side="left">
                 <SheetHeader className='gap-4'>
                   <SheetTitle>
-                    <span className="flex text-3xl items-center gap-3 font-bold cursor-pointer">
-                      <Rocket size={30} />
-                      LUNA
+                  <div className="flex w-full text-3xl items-center gap-3 font-bold cursor-pointer">
+                    <Rocket stroke='0' size={30} className='flex fill-foreground'/>
+                    <span className='flex gap-1'>
+                      LUNA<span className="text-red-700">.</span>
                     </span>
+                  </div>
                   </SheetTitle>
                   <SheetDescription className='flex text-foreground flex-col items-start h-full gap-2'>
                     <NavLink to="/" className={({ isActive }) => getNavLinkClass(isActive)}>Home</NavLink>
-                    <NavLink to="/APODPage" className={({ isActive }) => getNavLinkClass(isActive)}>APOD</NavLink>
-                    <NavLink to="/NeoWs" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>
+                    <NavLink to="/apod" className={({ isActive }) => getNavLinkClass(isActive)}>APOD</NavLink>
+                    <NavLink to="/neows" className={({ isActive }) => getNavLinkClass(isActive)}>NeoWs</NavLink>
+                    <NavLink to="/about" className={({ isActive }) => getNavLinkClass(isActive)}>About</NavLink>
                   </SheetDescription>
                 </SheetHeader>
               </SheetContent>

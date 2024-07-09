@@ -1,17 +1,18 @@
+// APOD.tsx
 import { useState, useEffect, useCallback } from 'react';
 import useNasaApod from '@/hooks/useNasaApod';
 import ApodThumbnails from '@/components/APODPage/ApodThumbnails';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
+import { Search, Telescope } from 'lucide-react';
 import NotFoundPage from '@/pages/NotFoundPage';
-import useValidateDate from '@/hooks/useValidateDate';
+import {useApodValidateDate} from '@/hooks/useValidateDate';
 import Loading from '../../pages/LoadingPage';
 
 export default function APOD() {
   const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [inputDate, setInputDate] = useState<string>(date);
-  const { isValidDate, validateDate } = useValidateDate();
+  const { isValidDate, validateDate } = useApodValidateDate();
   const { data, loading, error } = useNasaApod(date);
 
   const handleDateChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,26 +54,32 @@ export default function APOD() {
   }
 
   return (
-    <section className="h-full p-6 sm:p-8 sm:py-24 bg-muted">
+    <section className="h-full p-6 sm:p-8 pb-24 sm:pb-24 bg-muted">
       <div className='flex flex-col gap-8 sm:gap-16 h-full'>
-        <div className='grid justify-between sm:flex gap-3 sm:gap-0 items-end'>
+        <div className='grid justify-between md:flex gap-4 md:gap-0 items-end'>
           <h1 className='capitalize text-6xl sm:text-8xl font-bold text-muted-foreground/10'>Discover the cosmos!</h1>        
-          <div className='flex'>
-            <Input 
-              type="date" 
-              value={inputDate} 
-              onChange={handleDateChange} 
-              min="1995-06-16"
-              max={new Date().toISOString().split('T')[0]}
-              className='bg-background/50 border-none rounded-none shadow-md mb-4'
-            />
-            <Button 
-              onClick={handleFetchImage} 
-              disabled={!isValidDate}
-              className='rounded-none shadow-md'
-            >
-              <Search className='h-4 w-4'/>
-            </Button>
+          <div className='flex flex-col max-w-48 md:w-auto gap-1'>
+            <div className='flex items-center text-muted-foreground gap-2'>
+              <p className='text-sm'>Explore</p>
+              <Search className='h-3 w-3'/>
+            </div>
+            <div className='flex mb-4'>
+              <Input 
+                type="date" 
+                value={inputDate} 
+                onChange={handleDateChange} 
+                min="1900-01-01" 
+                // max={new Date().toISOString().split('T')[0]} 
+                className='bg-background/50 border-none rounded-none shadow-md focus-visible:ring-0'
+              />
+              <Button 
+                onClick={handleFetchImage} 
+                disabled={!isValidDate}
+                className='rounded-none shadow-md'
+              >
+                <Telescope className='h-4 w-4 fill-background'/>
+              </Button>
+            </div>
           </div>
         </div>
         <div className="flex flex-col sm:grid grid-cols-2 gap-4">
@@ -99,7 +106,7 @@ export default function APOD() {
               <h1 className='border-muted-foreground text-2xl font-bold'>{data.title}</h1>
               <p className='text-lg text-muted-foreground font-semibold'>{displayDate(date)}</p>
             </div>
-            <div className='overflow-y-scroll no-scrollbar h-full border-muted-foreground bg-background/20 p-4 shadow-md'>
+            <div className='overflow-y-scroll no-scrollbar h-full bg-background/50 hover:bg-background transition-colors p-4 shadow-md'>
               <p className='text-justify font-sans'>{data.explanation}</p>
             </div>
           </div>

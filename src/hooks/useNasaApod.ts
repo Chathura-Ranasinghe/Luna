@@ -1,17 +1,8 @@
+// useNasaApod.ts
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
-interface NasaApodData {
-  url: string;
-  title: string;
-  explanation: string;
-  media_type: string;
-}
-
-interface ErrorData {
-  message: string;
-  code?: string;
-}
+import { NasaApodData, ErrorData } from '@/types/types';
+import { NASA_API_KEY, NASA_APOD_URL } from '@/config/config';
 
 export default function useNasaApod(date: string) {
   const [data, setData] = useState<NasaApodData | null>(null);
@@ -20,8 +11,7 @@ export default function useNasaApod(date: string) {
 
   useEffect(() => {
     async function fetchAPIData() {
-      const NASA_KEY = import.meta.env.VITE_NASA_API_KEY;
-      const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_KEY}&date=${date}&thumbs=true`;
+      const url = `${NASA_APOD_URL}?api_key=${NASA_API_KEY}&date=${date}&thumbs=true`;
 
       const localKey = `NASA-${date}`;
       const cachedData = localStorage.getItem(localKey);

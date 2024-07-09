@@ -8,22 +8,24 @@ import APODPage from "./pages/APODPage";
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import NeoWsPage from "./pages/NeoWsPage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
-    <div className="font-mono">
+    <div >
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <BrowserRouter>
         <NavBar/>
           <Routes>
             <Route index element={<HomePage/>} />
-            <Route path="/APODPage" element={<APODPage/>} />
-            <Route path="/NeoWsPage" element={<NeoWsPage/>} />
+            <Route path="/apod" element={<APODPage/>} />
+            <Route path="/neows" element={<NeoWsPage/>} />
+            <Route path="/about" element={<AboutPage/>} />
           </Routes>
         <Footer/>
         </BrowserRouter>
 
-        <div className="fixed bg-muted/80 inset-0 -z-20">
+        <div className="fixed bg-muted/10 inset-0 -z-10">
           <Canvas>
             <Stars radius={50} count={2500} factor={4} fade speed={2} />
           </Canvas>

@@ -39,6 +39,7 @@ export default function TypingAnimation({
       )}
     >
       {displayedText ? displayedText : text}
+      <span className="text-red-700 text-5xl md:text-6xl pl-1">.</span>
     </h1>
   );
 }
