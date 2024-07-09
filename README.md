@@ -4,6 +4,8 @@
 
 Luna is an interactive web application that visualizes space data with captivating visuals. This project was created to enhance web development skills and provide an engaging way to learn about space phenomena.
 
+![Home page](/src/assets/sources/homecover.jpeg)
+
 ### 🌟 Features
 
 #### Immersive Experience
@@ -80,12 +82,16 @@ Luna represents a blend of cutting-edge technology and a passion for space explo
 
 # Homepage 🏠
 
-[https://github.com/aneesa04/TextSwift/assets/161751452/21cdebff-42ed-4f4c-b60e-dad5ad509395](https://github.com/aneesa04/Age-o-meter/assets/161751452/db164450-6451-4e1b-a728-49d47b210613)
+<img src="./src/assets/sources/home.jpeg" alt="Home page" style="width:700px;">
 
 ### APOD Hub 🌠
 
-[https://github.com/aneesa04/Age-o-meter/assets/161751452/d73bbbfd-39d3-44e8-a6b8-9cd6c7c86e17](https://github.com/aneesa04/Age-o-meter/assets/161751452/d73bbbfd-39d3-44e8-a6b8-9cd6c7c86e17)
+<img src="./src/assets/sources/apod.jpeg" alt="Home page" style="width:700px;">
 
 ### NeoWs Data 📡
 
-[https://github.com/aneesa04/Age-o-meter/assets/161751452/be359549-ba6a-4247-a417-1b11d82c6cae](https://github.com/aneesa04/Age-o-meter/assets/161751452/be359549-ba6a-4247-a417-1b11d82c6cae)
+<img src="./src/assets/sources/neows.jpeg" alt="Home page" style="width:700px;">
+
+### NeoWs About 📡
+
+<img src="./src/assets/sources/about.jpeg" alt="Home page" style="width:700px;">

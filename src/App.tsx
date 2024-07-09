@@ -25,7 +25,7 @@ function App() {
         <Footer/>
         </BrowserRouter>
 
-        <div className="fixed bg-muted/10 inset-0 -z-10">
+        <div className="fixed bg-gradient-to-r from-indigo-600/5 via-orange-700/5 to-blue-900/5 ... inset-0 -z-10">
           <Canvas>
             <Stars radius={50} count={2500} factor={4} fade speed={2} />
           </Canvas>
