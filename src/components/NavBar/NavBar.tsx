@@ -65,7 +65,7 @@ export default function NavBar() {
             <div className="flex w-full text-3xl items-center gap-3 font-bold select-none">
               <Rocket stroke='0' size={30} className='flex fill-foreground'/>
               <Link to='./' className='flex gap-1'>
-                LUNA<span className="text-green-700">.</span>
+                LUNA<span className="text-red-700">.</span>
               </Link>
             </div>
           </div>

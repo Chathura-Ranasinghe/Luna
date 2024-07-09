@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import useNeoWs from '@/hooks/useNasaNeoWs';
-import Loading from '@/components/Loading/Loading';
-import NotFoundPage from '@/pages/NotFoundPage';
+import Loading from '@/components/Interact/Loading';
+import NotFound from '@/components/Interact/NotFound';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {useNeoWsValidateDate} from '@/hooks/useValidateDate';
@@ -62,7 +62,7 @@ export default function NeoWs() {
   }
 
   if (error) {
-    return <NotFoundPage errorMsg={error.message} errorCode={error.code} />;
+    return <NotFound errorMsg={error.message} errorCode={error.code} />;
   }
 
   return (

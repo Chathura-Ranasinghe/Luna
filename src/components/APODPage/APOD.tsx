@@ -5,9 +5,9 @@ import ApodThumbnails from '@/components/APODPage/ApodThumbnails';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, Telescope } from 'lucide-react';
-import NotFoundPage from '@/pages/NotFoundPage';
+import NotFound from '@/components/Interact/NotFound';
 import {useApodValidateDate} from '@/hooks/useValidateDate';
-import Loading from '@/components/Loading/Loading';
+import Loading from '@/components/Interact/Loading';
 
 export default function APOD() {
   const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
@@ -46,7 +46,7 @@ export default function APOD() {
   }
 
   if (error) {
-    return <NotFoundPage errorMsg={error.message} errorCode={error.code} />;
+    return <NotFound errorMsg={error.message} errorCode={error.code} />;
   }
 
   if (!data) {

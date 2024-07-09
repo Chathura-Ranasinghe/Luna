@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
 import useNasaApodRange from '@/hooks/useNasaApodRange';
-import NotFoundPage from '@/pages/NotFoundPage';
-import Loading from '../Loading/Loading';
+import NotFound from '@/components/Interact/NotFound';
+import Loading from '../Interact/Loading';
 
 interface ApodThumbnailsProps {
   onThumbnailClick: (date: string) => void;
@@ -24,7 +24,7 @@ const ApodThumbnails: FC<ApodThumbnailsProps> = ({ onThumbnailClick }) => {
   }
 
   if (lastWeekError) {
-    return <NotFoundPage errorMsg={lastWeekError.message} errorCode={lastWeekError.code} />;
+    return <NotFound errorMsg={lastWeekError.message} errorCode={lastWeekError.code} />;
   }
 
   const sortedData = [...lastWeekData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
