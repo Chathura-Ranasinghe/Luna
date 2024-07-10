@@ -25,7 +25,7 @@ export default function About() {
             <div className="flex w-full md:w-auto">
             <BoxReveal boxColor={"#A3A3A3"} duration={0.5}>
               <div className="flex py-0 md:py-6">
-                <p className="flex text-2xl sm:text-4xl max-w-[412px] md:text-6xl text-muted-foreground font-black">
+                <p className="flex text-2xl sm:text-4xl max-w-[412px] md:text-6xl text-muted-foreground/50 font-black">
                 Thank you for visiting
                 </p>
               </div>

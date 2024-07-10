@@ -69,7 +69,7 @@ export default function APOD() {
                 value={inputDate} 
                 onChange={handleDateChange} 
                 min="1900-01-01" 
-                // max={new Date().toISOString().split('T')[0]} 
+                max={new Date().toISOString().split('T')[0]} 
                 className='bg-background/50 border-none rounded-none shadow-md focus-visible:ring-0'
               />
               <Button 

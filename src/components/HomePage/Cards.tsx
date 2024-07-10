@@ -9,6 +9,8 @@ import {
   Card,
   CardHeader,
 } from "@/components/ui/card";
+import GridPattern from "../ui/magicui/grid-pattern";
+import { cn } from "@/lib/utils";
 
 export default function Cards() {
   return (
@@ -26,7 +28,7 @@ export default function Cards() {
                 draggable="false"
               />
             </div>
-            <div className="flex w-full justify-center items-center p-6">
+            <div className="flex w-full justify-center items-center p-6 relative overflow-hidden">
               <div className="flex flex-col">
                 <div className="flex flex-col max-w-[520px] text-base">
                   <BoxReveal boxColor={"#A3A3A3"} duration={0.5}>
@@ -45,11 +47,21 @@ export default function Cards() {
                   </BoxReveal> 
                 </div> 
               </div>
+              <GridPattern
+                width={30}
+                height={30}
+                x={-1}
+                y={-1}
+                strokeDasharray={"4 2"}
+                className={cn(
+                "[mask-image:radial-gradient(200px_circle_at_center,white,transparent)]",
+                )}
+              /> 
             </div>
           </Card>
 
           <Card className='flex-col-reverse w-full flex md:flex-row border-none rounded-none shadow-md bg-background/50 hover:bg-background transition-colors gap-3 sm:gap-6'>
-            <div className="flex w-full justify-center items-center p-6">
+            <div className="flex w-full justify-center items-center p-6 relative overflow-hidden">
               <div className="flex flex-col max-w-[520px] text-base">
                 <BoxReveal boxColor={"#A3A3A3"} duration={0.5}>
                   <span className="text-xl font-bold text-red-700 uppercase">NASA<span className="text-xl text-muted-foreground/50"> Near Earth Object Web Service</span></span>
@@ -65,7 +77,17 @@ export default function Cards() {
                     <SquareArrowOutUpRight className="hover:scale-110 transition-transform text-red-700"/>
                   </Link>
                 </BoxReveal> 
-              </div>          
+              </div>
+              <GridPattern
+                width={30}
+                height={30}
+                x={-1}
+                y={-1}
+                strokeDasharray={"4 2"}
+                className={cn(
+                "[mask-image:radial-gradient(200px_circle_at_center,white,transparent)]",
+                )}
+              />          
             </div>
             <div className="md:min-w-[420px] h-60 md:h-96">
               <img

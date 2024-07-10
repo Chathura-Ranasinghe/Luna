@@ -18,7 +18,7 @@ export default function Cover({ text }: CoverProps) {
         className="fixed -z-10 h-full w-full object-cover dark:brightness-[0.6]"
         /> */}
         <div className='flex h-full p-6 pt-20 sm:p-8 sm:pt-20'>
-          <div className="relative flex h-full w-full items-center p-10 justify-center overflow-hidden rounded-lg">
+          <div className="relative flex h-full w-full items-center p-10 justify-center overflow-hidden">
             <TypingAnimation
               className='text-5xl md:text-6xl font-bold text-left capitalize'
               text={text}
