@@ -1,11 +1,11 @@
 import Error from "@/assets/images/error2.png";
 
-interface NotFoundPageProps {
+interface NotFoundProps {
   errorMsg: string;
   errorCode?: string;
 }
 
-export default function NotFoundPage({ errorMsg, errorCode }: NotFoundPageProps) {
+export default function NotFound({ errorMsg, errorCode }: NotFoundProps) {
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-3 bg-muted p-6 sm:p-8">
       <img 

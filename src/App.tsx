@@ -11,6 +11,7 @@ import Loading from "./components/Interact/Loading";
 
 import { Stars } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,7 @@ function App() {
               <Route path="/apod" element={<APODPage />} />
               <Route path="/neows" element={<NeoWsPage />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />
           </BrowserRouter>
